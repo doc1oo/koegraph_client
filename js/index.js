@@ -1,4 +1,5 @@
 //var socket = io.connect("shma.jp:4040");
+var threshold = 0;
 
 $(function(){
     $("#button").tap(function(){
@@ -10,33 +11,33 @@ $(function(){
 function showFirst(){
     $("#content").animate(
         {left: "0%"},
-        {duration: 500, easing: "ease-in-out"}
+        {duration: 50, easing: "ease-in-out"}
     );
 }
 
 function showConnecting(){
     $("#content").animate(
         {left: "-100%"},
-        {duration: 500, easing: "ease-in-out"}
+        {duration: 50, easing: "ease-in-out"}
     );
 }
 
 function showMeter(){
     $("#content").animate(
         {left: "-200%"},
-        {duration: 500, easing: "ease-in-out"}
+        {duration: 50, easing: "ease-in-out"}
     );
 }
 
 function changeMeter(value){
     $("#meter").animate(
         {height: (value)*10 + "%"},
-        {duration: 500, easing: "ease-in-out"}
+        {duration: 50, easing: "ease-in-out"}
     );
-//    socket.emit('voice', value);
+    
     $.ajax({
       type: "GET",
-      url: "http://192.168.1.74:3000/?id=1&vol="+value,
+      url: "http://192.168.111.20:3000/?id=1&vol="+value+"&threshold="+threshold,
       dataType: "script"
     });
     $("#aionum").html(value);
@@ -56,7 +57,7 @@ k.ready(function(){
     //Interval
     intervalId = window.setInterval(function(){
         k.analogReadRequest(k.AIO0);
-    }, 500);
+    }, 50);
 });
 
 k.on(k.KONASHI_EVENT_CONNECTED, function(){
@@ -77,4 +78,10 @@ k.updateAnalogValueAio0(function(data){
 k.disconnected(function(data){
     window.clearInterval(intervalId);
     showFirst();
+});
+
+// JQEURY
+$("#threshold").on('input', function() {
+   $("#threshold_text").html($("#threshold").val());
+   threshold = $("#threshold").val();
 });

@@ -1,7 +1,6 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -24,18 +23,19 @@
         </div>
         <div id="title">
             <span>マイク音量</span>
+            <input type="range" id="threshold" name="threshold" min=0 max=400>
+            <p id="threshold_text">yeah</p>
         </div>
     </div>
 </div>
 
 <!-- jquery -->
-<script src="http://zeptojs.com/zepto.min.js"></script>
-<script src="https://cdn.rawgit.com/madrobby/zepto/master/src/touch.js"></script>
-<script src="https://cdn.rawgit.com/madrobby/zepto/master/src/fx.js"></script>
-
+<script src="js/zepto.min.js"></script>
+<script src="js/touch.js"></script>
+<script src="js/fx.js"></script>
 
 <!-- konashijs -->
-<script src="http://konashi.ux-xu.com/kjs/konashi-bridge.min.js"></script>
+<script src="js/konashi-bridge.min.js"></script>
 <script src="js/index.js"></script>
 </body>
 </html>
