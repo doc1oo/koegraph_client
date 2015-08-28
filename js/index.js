@@ -1,11 +1,16 @@
 //var socket = io.connect("shma.jp:4040");
 var threshold = 0;
+var isConnectedIntervalId;
 
 $(function(){
     $("#button").tap(function(){
 	console.log('aaaa');
         k.find();
     });
+
+    isConnectedIntervalId = window.setInterval(function(){
+        k.isConnected(onCallIsConnected); 
+    }, 4000);
 });
 
 function showFirst(){
@@ -41,6 +46,12 @@ function changeMeter(value){
       dataType: "script"
     });
     $("#aionum").html(value);
+}
+
+function onCallIsConnected(value) {
+    if (value == false) {
+        k.findWithName('konashi2.0-f012a');        // f012aはL字のマイク （いま本番用の青色のマイクがkonashi2-f01a79、黄色のマイクがkonashi2-f01a77 ）
+    }
 }
 
 /////////////////////////////////////
